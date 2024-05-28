@@ -1,11 +1,9 @@
-import * as dotenv from 'dotenv';
+import 'dotenv/config';
 import path from 'path';
 import express, { Express, Router } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { runDBMongo } from './db/mongoose';
-
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const { SERVER_PORT, DB_URI } = process.env;
 
