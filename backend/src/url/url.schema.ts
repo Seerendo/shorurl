@@ -8,6 +8,11 @@ const urlSchema: Schema<IUrl> = new Schema(
       required: true,
       default: '',
     },
+    short: {
+      type: String,
+      required: true,
+      default: '',
+    },
     author: {
       type: String,
       required: false,
@@ -24,15 +29,4 @@ const urlSchema: Schema<IUrl> = new Schema(
   }
 );
 
-const UrlModel: Model<IUrl> = mongoose.model<IUrl>('urls', urlSchema);
-
-export async function findRg() {
-  const save = new UrlModel({
-    author: 'Roddy Andrade',
-    url: 'https://www.linkedin.com/in/seerendo/',
-    description: 'LinkedIn',
-  });
-  await save.save();
-  const data = await UrlModel.find({ description: 'LinkedIn' });
-  console.log({ data, save });
-}
+export const UrlModel: Model<IUrl> = mongoose.model<IUrl>('urls', urlSchema);
