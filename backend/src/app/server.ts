@@ -1,11 +1,11 @@
-import 'dotenv/config';
-import path from 'path';
 import express, { Express, Router } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { runDBMongo } from './db/mongoose';
+import { AppDataSource } from './db/typeorm';
 
-const { SERVER_PORT, DB_URI } = process.env;
+interface HttpHandler {
+  init(app: Router): void;
+}
 
 export class HttpAPI {
   #app: Express;
@@ -19,18 +19,27 @@ export class HttpAPI {
     app.use(morgan('dev'));
     app.use(cors({}));
 
-    app.set('port', SERVER_PORT || port || 3000);
+    app.set('port', process.env.PORT || port || 3000);
 
     this.#app = app;
   }
 
+  addHandler(handler: HttpHandler) {
+    const apiSubRouter = Router({ mergeParams: true });
+    handler.init(apiSubRouter);
+    this.#app.use('/api', apiSubRouter);
+  }
+
   run() {
     this.#app.listen(this.#app.get('port'), async () => {
-      await runDBMongo(DB_URI!)
+      console.log(`Server running on PORT: ${this.#app.get('port')}`);
+      /* AppDataSource.initialize()
         .then(() => {
           console.log(`Server running on PORT: ${this.#app.get('port')}`);
         })
-        .catch(console.dir);
+        .catch((err) => {
+          console.dir(err);
+        }); */
     });
   }
 }
