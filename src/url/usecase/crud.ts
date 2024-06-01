@@ -14,7 +14,7 @@ export class UrlUC implements UrlUseCase {
     try {
       const urlData = await this.#urlRepo.findByOriginalUrl(originalUrl);
       if (urlData) return urlData.shortUrl;
-      const shortUrl = `${baseUrl}/${urlCode}`;
+      const shortUrl = `${baseUrl}/api/url/${urlCode}`;
       await this.#urlRepo.registerUrl({
         urlCode: urlCode,
         originalUrl: originalUrl,

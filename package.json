@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon src/index.ts --exec ts-node-dev --respawn",
-    "start": "npm install && node dist/index.js"
+    "start": "npm install && node dist/index.js",
+    "lint": "npx oxlint@latest"
   },
   "keywords": [],
   "author": "Roddy Andrade (Seerendo)",
