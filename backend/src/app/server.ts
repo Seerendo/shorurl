@@ -32,14 +32,14 @@ export class HttpAPI {
 
   run() {
     this.#app.listen(this.#app.get('port'), async () => {
-      console.log(`Server running on PORT: ${this.#app.get('port')}`);
-      /* AppDataSource.initialize()
+      /* console.log(`Server running on PORT: ${this.#app.get('port')}`); */
+      AppDataSource.initialize()
         .then(() => {
           console.log(`Server running on PORT: ${this.#app.get('port')}`);
         })
         .catch((err) => {
           console.dir(err);
-        }); */
+        });
     });
   }
 }

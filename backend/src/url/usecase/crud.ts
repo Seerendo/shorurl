@@ -29,13 +29,13 @@ export class UrlUC implements UrlUseCase {
     }
   }
 
-  async redirectUrl(shortUrl: string): Promise<String> {
+  async redirectUrl(urlCode: string): Promise<String> {
     try {
-      const urlData = await this.#urlRepo.findByShortUrl(shortUrl);
+      const urlData = await this.#urlRepo.findByUrlCode(urlCode);
       if (!urlData) {
         throw new Error('No existe un URL asi');
       }
-      return urlData.shortUrl;
+      return urlData.originalUrl;
     } catch (error) {
       let message = 'Unknown Error';
       if (error instanceof Error) message = error.message;

@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
   entities: [
     UrlORM
   ],
-  synchronize: true,
+  synchronize: false,
   logging: true,
   ssl: true,
 });

@@ -19,7 +19,7 @@ export class UrlModel {
 export interface UrlRepository {
   registerUrl(urlModel: UrlModel): Promise<boolean>;
   findByOriginalUrl(originalUrl: string): Promise<UrlModel | null>;
-  findByShortUrl(originalUrl: string): Promise<UrlModel | null>;
+  findByUrlCode(originalUrl: string): Promise<UrlModel | null>;
 }
 
 export interface UrlUseCase {

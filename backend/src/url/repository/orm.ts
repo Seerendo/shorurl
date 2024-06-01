@@ -18,7 +18,7 @@ export class UrlORM {
   declare originalUrl: string;
   @Column()
   declare shortUrl: string;
-  @Column()
+  @Column({ nullable: true })
   declare description: string;
 
   @CreateDateColumn()
@@ -62,8 +62,8 @@ export class ORMUrlRepository implements UrlRepository {
 
   async registerUrl(urlModel: UrlModel): Promise<boolean> {
     try {
-      const url = await this.#urlRepository.create(urlModel);
-      this.#urlRepository.save(url);
+      const url = this.#urlRepository.create(urlModel);
+      await this.#urlRepository.save(url);
       return true;
     } catch (error) {
       let message = 'Unknown Error';
@@ -78,6 +78,7 @@ export class ORMUrlRepository implements UrlRepository {
       const url = await this.#urlRepository.findOneBy({
         originalUrl: originalUrl,
       });
+      if (!url) return null;
       return url.toUrl();
     } catch (error) {
       let message = 'Unknown Error';
@@ -87,10 +88,10 @@ export class ORMUrlRepository implements UrlRepository {
     }
   }
 
-  async findByShortUrl(shortUrl: string): Promise<UrlModel | null> {
+  async findByUrlCode(urlCode: string): Promise<UrlModel | null> {
     try {
       const url = await this.#urlRepository.findOneBy({
-        shortUrl: shortUrl,
+        urlCode: urlCode,
       });
       return url.toUrl();
     } catch (error) {
