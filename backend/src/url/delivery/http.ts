@@ -1,5 +1,8 @@
 import { Express, Request, Response, Router, NextFunction } from 'express';
 import { UrlUseCase } from '../domain/url';
+import { UrlValidator } from './middlewares/validators';
+
+const urlValidator = new UrlValidator();
 
 export class UrlHandler {
   #urlUC: UrlUseCase;
@@ -11,7 +14,9 @@ export class UrlHandler {
   init(apiInstance: Express) {
     const subRouter = Router({ mergeParams: true });
 
-    subRouter.post('/', (req, res) => this.#registerUrl(req, res));
+    subRouter.post('/', urlValidator.validateLink, (req, res) =>
+      this.#registerUrl(req, res)
+    );
     subRouter.get('/:urlCode', (req, res) => this.#redirectUrl(req, res));
 
     apiInstance.use('/url', subRouter);

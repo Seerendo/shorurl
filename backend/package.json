@@ -4,7 +4,7 @@
   "description": "Url Shortener Node.js/Express.js",
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc",
+    "build": "tsc",
     "dev": "nodemon src/index.ts --exec ts-node-dev --respawn",
     "start": "npm install && node dist/index.js"
   },
@@ -23,7 +23,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "joi": "^17.13.1",
     "mongoose": "^8.4.0",
     "morgan": "^1.10.0",
     "nanoid": "^3.3.7",
