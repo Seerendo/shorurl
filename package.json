@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon src/index.ts --exec ts-node-dev --respawn",
+    "dev": "nodemon src/index.ts --exec ts-node --respawn",
     "start": "npm install && node dist/index.js",
     "lint": "npx oxlint@latest"
   },
@@ -19,7 +19,7 @@
     "mocha": "^10.4.0",
     "nodemon": "^3.1.1",
     "supertest": "^7.0.0",
-    "ts-node-dev": "^2.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "dependencies": {
