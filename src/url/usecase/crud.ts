@@ -33,7 +33,8 @@ export class UrlUC implements UrlUseCase {
     try {
       const urlData = await this.#urlRepo.findByUrlCode(urlCode);
       if (!urlData) {
-        throw new Error('No existe un URL asi');
+        const message = 'This url does not exist';
+        throw new Error(message);
       }
       return urlData.originalUrl;
     } catch (error) {

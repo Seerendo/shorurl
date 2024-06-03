@@ -93,6 +93,7 @@ export class ORMUrlRepository implements UrlRepository {
       const url = await this.#urlRepository.findOneBy({
         urlCode: urlCode,
       });
+      if (!url) return null;
       return url.toUrl();
     } catch (error) {
       let message = 'Unknown Error';

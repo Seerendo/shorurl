@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import logger from '../../../logger';
 
 export class UrlValidator {
   async validateLink(req: Request, res: Response, next: NextFunction) {
@@ -26,6 +27,7 @@ export class UrlValidator {
     }
 
     if (errors.size > 0) {
+      logger.error(JSON.stringify(Object.fromEntries(errors)));
       return res.status(400).json({
         message: 'Errors occurred',
         errors: Object.fromEntries(errors),
@@ -33,5 +35,9 @@ export class UrlValidator {
     } else {
       next();
     }
+  }
+
+  async validateUrlCode(req: Request, res: Response, next: NextFunction) {
+    const { urlCode } = req.params;
   }
 }

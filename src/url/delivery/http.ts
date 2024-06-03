@@ -1,6 +1,7 @@
 import { Express, Request, Response, Router, NextFunction } from 'express';
 import { UrlUseCase } from '../domain/url';
 import { UrlValidator } from './middlewares/validators';
+import logger from '../../logger';
 
 const urlValidator = new UrlValidator();
 
@@ -23,16 +24,18 @@ export class UrlHandler {
   }
 
   #registerUrl(req: Request, res: Response) {
+    logger.info('Register Url');
     const { originalUrl } = req.body;
     this.#urlUC
       .registerUrl(originalUrl)
       .then((urlShort) => {
-        res.status(200).json({
+        res.status(201).json({
           message: 'Url shortened successfully',
           shortUrl: urlShort,
         });
       })
       .catch((error) => {
+        logger.error(error.message);
         res.status(400).json({
           message: error.message,
           shortUrl: null,
@@ -41,6 +44,7 @@ export class UrlHandler {
   }
 
   #redirectUrl(req: Request, res: Response) {
+    logger.info('Redirect Url');
     const { urlCode } = req.params;
     this.#urlUC
       .redirectUrl(urlCode)
@@ -48,7 +52,8 @@ export class UrlHandler {
         res.redirect(307, originalUrl.toString());
       })
       .catch((error) => {
-        res.status(400).json({
+        logger.error(error.message);
+        res.status(404).json({
           message: error.message,
         });
       });
