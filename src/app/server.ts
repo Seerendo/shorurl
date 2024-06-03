@@ -2,6 +2,7 @@ import express, { Express, Router } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { AppDataSource } from './db/typeorm';
+import logger from '../logger';
 
 interface HttpHandler {
   init(app: Router): void;
@@ -32,12 +33,13 @@ export class HttpAPI {
 
   run() {
     this.#app.listen(this.#app.get('port'), async () => {
-      /* console.log(`Server running on PORT: ${this.#app.get('port')}`); */
       AppDataSource.initialize()
         .then(() => {
+          logger.info(`Server running on PORT: ${this.#app.get('port')}`)
           console.log(`Server running on PORT: ${this.#app.get('port')}`);
         })
         .catch((err) => {
+          logger.error(err)
           console.dir(err);
         });
     });
