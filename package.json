@@ -4,21 +4,25 @@
   "description": "Url Shortener Node.js/Express.js",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm install && tsc",
     "dev": "nodemon src/index.ts --exec ts-node --respawn",
-    "start": "npm install && node dist/index.js",
+    "start": "node dist/index.js",
     "lint": "npx oxlint@latest"
   },
-  "keywords": [],
+  "keywords": [
+    "node.js",
+    "express.js",
+    "typescript",
+    "typeorm",
+    "typeorm"
+  ],
   "author": "Roddy Andrade (Seerendo)",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/morgan": "^1.9.9",
-    "mocha": "^10.4.0",
     "nodemon": "^3.1.1",
-    "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
