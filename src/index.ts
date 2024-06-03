@@ -6,7 +6,7 @@ import { UrlHandler } from './url/delivery/http';
 import { ORMUrlRepository } from './url/repository/orm';
 import { UrlUC } from './url/usecase/crud';
 
-const httpAPI = new HttpAPI(3001);
+const httpAPI = new HttpAPI(3000);
 
 async function main() {
   httpAPI.run();
