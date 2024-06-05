@@ -2,7 +2,7 @@ export class UrlModel {
   urlCode: string;
   originalUrl: string;
   shortUrl: string;
-  description?: string;
+  alias?: string;
   createdAt?: Date;
   updatedAt?: Date;
 
@@ -10,7 +10,7 @@ export class UrlModel {
     this.urlCode = '';
     this.originalUrl = '';
     this.shortUrl = '';
-    this.description = '';
+    this.alias = '';
     this.createdAt = new Date();
     this.updatedAt = new Date();
   }
@@ -23,6 +23,6 @@ export interface UrlRepository {
 }
 
 export interface UrlUseCase {
-  registerUrl(originalUrl: string): Promise<String>;
+  registerUrl(originalUrl: string, alias?: string): Promise<String>;
   redirectUrl(shortUrl: string): Promise<String>;
 }

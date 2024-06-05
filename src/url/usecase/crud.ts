@@ -8,12 +8,18 @@ export class UrlUC implements UrlUseCase {
     this.#urlRepo = urlRepo;
   }
 
-  async registerUrl(originalUrl: string): Promise<String> {
-    const urlCode = nanoid(10);
+  async registerUrl(originalUrl: string, alias?: string): Promise<String> {
+    let urlCode = '';
+    if (!alias) {
+      urlCode = nanoid(10);
+    }
+    urlCode = alias;
+
     const baseUrl = process.env.BASE_URL;
     try {
       const urlData = await this.#urlRepo.findByOriginalUrl(originalUrl);
       if (urlData) return urlData.shortUrl;
+
       const shortUrl = `${baseUrl}/api/url/${urlCode}`;
       await this.#urlRepo.registerUrl({
         urlCode: urlCode,

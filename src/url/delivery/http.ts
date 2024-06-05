@@ -25,9 +25,9 @@ export class UrlHandler {
 
   #registerUrl(req: Request, res: Response) {
     logger.info('Register Url');
-    const { originalUrl } = req.body;
+    const { originalUrl, alias } = req.body;
     this.#urlUC
-      .registerUrl(originalUrl)
+      .registerUrl(originalUrl, alias)
       .then((urlShort) => {
         res.status(201).json({
           message: 'Url shortened successfully',

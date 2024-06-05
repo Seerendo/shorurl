@@ -19,7 +19,7 @@ export class UrlORM {
   @Column()
   declare shortUrl: string;
   @Column({ nullable: true })
-  declare description: string;
+  declare alias: string;
 
   @CreateDateColumn()
   declare createdAt: Date;
@@ -32,7 +32,7 @@ export class UrlORM {
     urlModel.shortUrl = this.shortUrl;
     urlModel.originalUrl = this.originalUrl;
     urlModel.urlCode = this.urlCode;
-    urlModel.description = this.description;
+    urlModel.alias = this.alias;
     urlModel.createdAt = this.createdAt;
     urlModel.updatedAt = this.updatedAt;
 
@@ -43,7 +43,7 @@ export class UrlORM {
     this.urlCode = urlModel.urlCode;
     this.originalUrl = urlModel.originalUrl;
     this.shortUrl = urlModel.shortUrl;
-    this.description = urlModel.description;
+    this.alias = urlModel.alias;
     this.createdAt = urlModel.createdAt;
     this.updatedAt = urlModel.updatedAt;
 
