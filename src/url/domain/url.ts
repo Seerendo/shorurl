@@ -2,7 +2,6 @@ export class UrlModel {
   urlCode: string;
   originalUrl: string;
   shortUrl: string;
-  alias?: string;
   createdAt?: Date;
   updatedAt?: Date;
 
@@ -10,7 +9,6 @@ export class UrlModel {
     this.urlCode = '';
     this.originalUrl = '';
     this.shortUrl = '';
-    this.alias = '';
     this.createdAt = new Date();
     this.updatedAt = new Date();
   }

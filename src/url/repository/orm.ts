@@ -11,19 +11,17 @@ import { UrlModel, UrlRepository } from '../domain/url';
 
 @Entity('urls')
 export class UrlORM {
-  @PrimaryColumn({ unique: true, unsigned: true })
+  @PrimaryColumn({ type: 'varchar', unique: true, unsigned: true })
   declare urlCode: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100, nullable: false })
   declare originalUrl: string;
-  @Column()
+  @Column({ type: 'varchar', length: 50, nullable: false })
   declare shortUrl: string;
-  @Column({ nullable: true })
-  declare alias: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: Date })
   declare createdAt: Date;
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: Date })
   declare updatedAt: Date;
 
   toUrl(): UrlModel {
@@ -32,7 +30,6 @@ export class UrlORM {
     urlModel.shortUrl = this.shortUrl;
     urlModel.originalUrl = this.originalUrl;
     urlModel.urlCode = this.urlCode;
-    urlModel.alias = this.alias;
     urlModel.createdAt = this.createdAt;
     urlModel.updatedAt = this.updatedAt;
 
@@ -43,7 +40,6 @@ export class UrlORM {
     this.urlCode = urlModel.urlCode;
     this.originalUrl = urlModel.originalUrl;
     this.shortUrl = urlModel.shortUrl;
-    this.alias = urlModel.alias;
     this.createdAt = urlModel.createdAt;
     this.updatedAt = urlModel.updatedAt;
 
