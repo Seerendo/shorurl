@@ -9,11 +9,7 @@ export class UrlUC implements UrlUseCase {
   }
 
   async registerUrl(originalUrl: string, alias?: string): Promise<String> {
-    let urlCode = '';
-    if (!alias) {
-      urlCode = nanoid(10);
-    }
-    urlCode = alias;
+    let urlCode = alias ? alias : nanoid(10);
 
     const baseUrl = process.env.BASE_URL;
     try {
