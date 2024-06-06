@@ -16,12 +16,12 @@ import { UrlUC } from '../src/url/usecase/crud';
 import { UrlHandler } from '../src/url/delivery/http';
 import { AppDataSource } from '../src/app/db/typeorm';
 
-const httpAPI = new HttpAPI(3001);
+const httpAPI = new HttpAPI(3002);
 
 const app = httpAPI.app;
 let server: Server;
 
-describe('Shorten Url integration test', () => {
+describe('Redirect Url integration test', () => {
   beforeAll(async () => {
     await AppDataSource.initialize();
     const urlRepo = new ORMUrlRepository(AppDataSource);
@@ -53,22 +53,17 @@ describe('Shorten Url integration test', () => {
     }
   });
 
-  it('Should shorten url', async () => {
-    const originalUrl = 'https://lindekin.com/in/seerendo';
-    // The alias is not required for a random urlCode to be generated.
-    const res = await request(server).post('/api/url').send({ originalUrl });
-
-    expect(res.status).toBe(201);
+  it('Should redirect if url key exist', async () => {
+    const originalUrl = 'https://www.youtube.com';
+    const alias = 'youtube';
+    await request(server).post('/api/url').send({ originalUrl, alias });
+    const res = await request(server).get(`/api/url/${alias}`);
+    expect(res.status).toBe(307);
   });
 
-  it('Should throw error if alias already exist', async () => {
-    const originalUrl = 'https://www.google.com';
-    const alias = 'google';
-
-    let res = await request(server)
-      .post('/api/url')
-      .send({ originalUrl, alias });
-    res = await request(server).post('/api/url').send({ originalUrl, alias });
-    expect(res.status).toBe(400);
+  it('Should throw error if url key does not exist', async () => {
+    const alias = 'unknown';
+    const res = await request(server).get(`/api/url/${alias}`);
+    expect(res.status).toBe(404);
   });
 });

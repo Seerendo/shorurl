@@ -20,7 +20,7 @@ export class HttpAPI {
     app.use(morgan('dev'));
     app.use(cors({}));
 
-    app.set('port', process.env.PORT || port || 3000);
+    app.set('port', port || process.env.PORT || 3000);
 
     this.app = app;
   }
