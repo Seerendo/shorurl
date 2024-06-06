@@ -21,6 +21,6 @@ export interface UrlRepository {
 }
 
 export interface UrlUseCase {
-  registerUrl(originalUrl: string, alias?: string): Promise<String>;
-  redirectUrl(shortUrl: string): Promise<String>;
+  registerUrl(originalUrl: string, alias?: string): Promise<string>;
+  redirectUrl(shortUrl: string): Promise<string>;
 }

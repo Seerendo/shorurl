@@ -25,7 +25,7 @@ export class UrlHandler {
 
   #registerUrl(req: Request, res: Response) {
     const { originalUrl, alias } = req.body;
-    logger.info(`HTTP Register url ${originalUrl} ${alias}`);
+    logger.info('HTTP Register Url');
     this.#urlUC
       .registerUrl(originalUrl, alias)
       .then((urlShort) => {
@@ -44,7 +44,7 @@ export class UrlHandler {
   }
 
   #redirectUrl(req: Request, res: Response) {
-    logger.info(`HTTP Redirect Url`);
+    logger.info('HTTP Redirect Url');
     const { urlCode } = req.params;
     this.#urlUC
       .redirectUrl(urlCode)

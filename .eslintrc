@@ -1,0 +1,19 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "keyword-spacing": ["error", { "after": true, "before": true }],
+    "key-spacing": ["error", { "afterColon": true }],
+    "space-infix-ops": ["error", { "int32Hint": false }]
+  }
+}

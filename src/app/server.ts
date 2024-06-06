@@ -35,11 +35,11 @@ export class HttpAPI {
     this.app.listen(this.app.get('port'), async () => {
       AppDataSource.initialize()
         .then(() => {
-          logger.info(`Server running on PORT: ${this.app.get('port')}`)
+          logger.info(`Server running on PORT: ${this.app.get('port')}`);
           console.log(`Server running on PORT: ${this.app.get('port')}`);
         })
         .catch((err) => {
-          logger.error(err)
+          logger.error(err);
           console.dir(err);
         });
     });

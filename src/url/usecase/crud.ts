@@ -9,9 +9,9 @@ export class UrlUC implements UrlUseCase {
     this.#urlRepo = urlRepo;
   }
 
-  async registerUrl(originalUrl: string, alias?: string): Promise<String> {
-    logger.info(`UC Register Url`);
-    let urlCode = alias ? alias : nanoid(10);
+  async registerUrl(originalUrl: string, alias?: string): Promise<string> {
+    logger.info('UC Register Url');
+    const urlCode = alias ? alias : nanoid(10);
 
     const baseUrl = process.env.BASE;
     try {
@@ -31,7 +31,6 @@ export class UrlUC implements UrlUseCase {
         originalUrl: originalUrl,
         shortUrl: shortUrl,
       });
-      logger.info(`Aqui la base ${baseUrl} aqui el short ${shortUrl}`);
       return shortUrl;
     } catch (error) {
       let message = 'Unknown Error';
@@ -41,8 +40,8 @@ export class UrlUC implements UrlUseCase {
     }
   }
 
-  async redirectUrl(urlCode: string): Promise<String> {
-    logger.info(`UC Redirect Url`);
+  async redirectUrl(urlCode: string): Promise<string> {
+    logger.info('UC Redirect Url');
     try {
       const urlData = await this.#urlRepo.findByUrlCode(urlCode);
       if (!urlData) {
