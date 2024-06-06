@@ -4,7 +4,7 @@
   "description": "Url Shortener Node.js/Express.js",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && tsc",
+    "build": "tsc",
     "dev": "nodemon src/index.ts --exec ts-node --respawn",
     "start": "node dist/index.js",
     "lint": "eslint .  --ext .ts",
@@ -16,7 +16,8 @@
     "express.js",
     "typescript",
     "typeorm",
-    "typeorm"
+    "eslint",
+    "vitest"
   ],
   "author": "Roddy Andrade (Seerendo)",
   "license": "ISC",
