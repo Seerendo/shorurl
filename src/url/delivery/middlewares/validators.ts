@@ -36,8 +36,4 @@ export class UrlValidator {
       next();
     }
   }
-
-  async validateUrlCode(req: Request, res: Response, next: NextFunction) {
-    const { urlCode } = req.params;
-  }
 }

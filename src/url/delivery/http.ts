@@ -1,4 +1,4 @@
-import { Express, Request, Response, Router, NextFunction } from 'express';
+import { Express, Request, Response, Router } from 'express';
 import { UrlUseCase } from '../domain/url';
 import { UrlValidator } from './middlewares/validators';
 import logger from '../../logger';
@@ -24,8 +24,8 @@ export class UrlHandler {
   }
 
   #registerUrl(req: Request, res: Response) {
-    logger.info('Register Url');
     const { originalUrl, alias } = req.body;
+    logger.info(`HTTP Register url ${originalUrl} ${alias}`);
     this.#urlUC
       .registerUrl(originalUrl, alias)
       .then((urlShort) => {
@@ -44,7 +44,7 @@ export class UrlHandler {
   }
 
   #redirectUrl(req: Request, res: Response) {
-    logger.info('Redirect Url');
+    logger.info(`HTTP Redirect Url`);
     const { urlCode } = req.params;
     this.#urlUC
       .redirectUrl(urlCode)

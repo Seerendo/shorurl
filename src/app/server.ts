@@ -9,7 +9,7 @@ interface HttpHandler {
 }
 
 export class HttpAPI {
-  #app: Express;
+  app: Express;
 
   constructor(port?: number) {
     const app: Express = express();
@@ -22,21 +22,21 @@ export class HttpAPI {
 
     app.set('port', process.env.PORT || port || 3000);
 
-    this.#app = app;
+    this.app = app;
   }
 
   addHandler(handler: HttpHandler) {
     const apiSubRouter = Router({ mergeParams: true });
     handler.init(apiSubRouter);
-    this.#app.use('/api', apiSubRouter);
+    this.app.use('/api', apiSubRouter);
   }
 
   run() {
-    this.#app.listen(this.#app.get('port'), async () => {
+    this.app.listen(this.app.get('port'), async () => {
       AppDataSource.initialize()
         .then(() => {
-          logger.info(`Server running on PORT: ${this.#app.get('port')}`)
-          console.log(`Server running on PORT: ${this.#app.get('port')}`);
+          logger.info(`Server running on PORT: ${this.app.get('port')}`)
+          console.log(`Server running on PORT: ${this.app.get('port')}`);
         })
         .catch((err) => {
           logger.error(err)

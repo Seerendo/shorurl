@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { UrlRepository, UrlUseCase } from '../domain/url';
+import logger from '../../logger';
 
 export class UrlUC implements UrlUseCase {
   #urlRepo: UrlRepository;
@@ -9,10 +10,18 @@ export class UrlUC implements UrlUseCase {
   }
 
   async registerUrl(originalUrl: string, alias?: string): Promise<String> {
+    logger.info(`UC Register Url`);
     let urlCode = alias ? alias : nanoid(10);
 
-    const baseUrl = process.env.BASE_URL;
+    const baseUrl = process.env.BASE;
     try {
+      const aliasExist = await this.#urlRepo.findByUrlCode(urlCode);
+      if (aliasExist) {
+        const message =
+          'This alias already exists, please choose another alias';
+        throw new Error(message);
+      }
+
       const urlData = await this.#urlRepo.findByOriginalUrl(originalUrl);
       if (urlData) return urlData.shortUrl;
 
@@ -22,6 +31,7 @@ export class UrlUC implements UrlUseCase {
         originalUrl: originalUrl,
         shortUrl: shortUrl,
       });
+      logger.info(`Aqui la base ${baseUrl} aqui el short ${shortUrl}`);
       return shortUrl;
     } catch (error) {
       let message = 'Unknown Error';
@@ -32,6 +42,7 @@ export class UrlUC implements UrlUseCase {
   }
 
   async redirectUrl(urlCode: string): Promise<String> {
+    logger.info(`UC Redirect Url`);
     try {
       const urlData = await this.#urlRepo.findByUrlCode(urlCode);
       if (!urlData) {

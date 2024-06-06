@@ -12,6 +12,6 @@ export const AppDataSource = new DataSource({
     UrlORM
   ],
   synchronize: true,
-  logging: true,
+  logging: false,
   ssl: false,
 });
