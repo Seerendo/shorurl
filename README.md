@@ -30,11 +30,16 @@ This project is a simple service that allows users to get shorter versions of ur
 * `test/`: Tests 
 
 
-# Run 
+# Run with npm
 * Create `.env` file from `.env.example`, filling in the missing details
 * Install dependencies: `npm install`
 * Build server: `npm run build`
 * Start server: `npm run start`
+
+# Run with docker-compose
+* Create and run containers: `docker-compose up --build`
+* Verify docker containers logs: `docker-compose logs -f`
+* Stop and remove containers: `docker-compose down`
 
 # API
 
