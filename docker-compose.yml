@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  postgres:
+      image: postgres:16.1
+      ports:
+        - 5433:5432
+      environment:
+        - POSTGRES_USER = postgres
+        - POSTGRES_PASSWORD = qwerty
+        - POSTGRES_DB = url_shortener
+      volumes:
+        - pgdata:/var/lib/postgresql/data
+  url_shortener:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_HOST = postgres
+      - DATABASE_USER = postgres
+      - DATABASE_PASSWORD = qwerty
+      - DATABASE_NAME = url_shortener
+      - BASE = http://localhost:3000
+
+volumes:
+  pgdata:
