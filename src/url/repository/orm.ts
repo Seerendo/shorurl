@@ -16,7 +16,7 @@ export class UrlORM {
 
   @Column({ type: 'varchar', length: 100, nullable: false })
   declare originalUrl: string;
-  @Column({ type: 'varchar', length: 50, nullable: false })
+  @Column({ type: 'varchar', length: 100, nullable: false })
   declare shortUrl: string;
 
   @CreateDateColumn({ type: Date })
